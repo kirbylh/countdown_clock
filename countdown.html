@@ -1,0 +1,43 @@
+<div id="cd">
+  <div class="box"><span id="d">00</span><small>Days</small></div>
+  <div class="box"><span id="h">00</span><small>Hours</small></div>
+  <div class="box"><span id="m">00</span><small>Minutes</small></div>
+  <div class="box"><span id="s">00</span><small>Seconds</small></div>
+</div>
+
+<style>
+  html, body { background: transparent; margin: 0; }
+  #cd {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 12px;
+  }
+  .box {
+    min-width: 84px; padding: 14px 10px; text-align: center;
+    border: 2px solid #74FA93; border-radius: 12px;
+  }
+  .box span {
+    display: block; font-size: 2.6rem; font-weight: 700;
+    line-height: 1; color: #74FA93;
+    font-variant-numeric: tabular-nums;
+  }
+  .box small {
+    display: block; margin-top: 8px; font-size: .8rem;
+    letter-spacing: .12em; text-transform: uppercase; color: #F1EAD8;
+  }
+</style>
+
+<script>
+  const target = new Date("2027-01-07T20:00:00+03:00").getTime();
+  const pad = n => String(n).padStart(2, "0");
+  function tick() {
+    let diff = Math.max(0, target - Date.now());
+    const s = Math.floor(diff / 1000);
+    document.getElementById("d").textContent = pad(Math.floor(s / 86400));
+    document.getElementById("h").textContent = pad(Math.floor(s % 86400 / 3600));
+    document.getElementById("m").textContent = pad(Math.floor(s % 3600 / 60));
+    document.getElementById("s").textContent = pad(s % 60);
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
